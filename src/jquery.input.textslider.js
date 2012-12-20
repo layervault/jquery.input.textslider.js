@@ -23,9 +23,12 @@
     inputFor,
     anchorFor;
 
-  randomClass = function () {
-    return "LV-" + Math.floor(Math.random() * 100000000);
-  };
+  randomClass = (function () {
+    var i = 0;
+    return function () {
+      return 'LV-' + (i++);
+    };
+  }());
 
   swapForAnchor = function ($e) {
     $e.hide();

@@ -71,17 +71,17 @@
   };
 
   precision = function ($input) {
-    var precision;
+    var p;
 
     if ($input.length > 0) {
-      precision = parseInt($input.attr('data-precision'), 10);
+      p = parseInt($input.attr('data-precision'), 10);
     }
 
-    if (isNaN(precision) || !precision) {
-      precision = options.precision;
+    if (isNaN(p) || !p) {
+      p = options.precision;
     }
 
-    return precision;
+    return p;
   };
 
   setupTextSlider = function ($e) {
@@ -89,7 +89,9 @@
       id = randomClass(),
       $anchor = $('<a class="LVTextSliderAnchor" href="#"></a>');
 
-    $e.blur(onInputBlur);
+    $e
+      .blur(onInputBlur)
+      .keydown(onInputKeydown);
 
     $anchor
       .text($e.val())
@@ -118,6 +120,11 @@
     swapForAnchor($e);
   };
 
+  valueFor = function ($e) {
+    return parseFloat($e.val(), 10)
+      .toFixed(precision($e));
+  };
+
   //-- Methods to attach to jQuery sets
 
   $.fn.textslider = function() {
@@ -136,14 +143,28 @@
   onInputBlur = function (event) {
     var
       $target = $(event.target),
-      $a = anchorFor($target),
-      newValue = parseFloat($target.val(), 10);
+      $a = anchorFor($target);
 
-    newValue = newValue.toFixed(precision($target));
-
-    $target.val(newValue);
+    $target.val(valueFor($target));
     swapForAnchor($target);
     $a.trigger('jquery.textslider.changed');
+  };
+
+  onInputKeydown = function (event) {
+    var
+      $target,
+      $a;
+
+    if (event.keyCode === 13) {
+      $target = $(event.target);
+      $target.val(valueFor($target));
+      $a = anchorFor($target);
+      swapForAnchor($target);
+      $a.trigger('jquery.textslider.changed');
+      return false;
+    }
+
+    return true;
   };
 
   onAnchorClick = function (event) {

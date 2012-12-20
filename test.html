@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+</head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="/src/jquery.input.textslider.js"></script>
+<body>
+
+  <h1>Scrollable inputs, man</h1>
+
+  <ul>
+    <li>CTRL Key for fine-grained control</li>
+    <li>Shift Key for warp-speed</li>
+  </ul>
+
+  <input type="text" data-text-slider value="100.0">
+  <script>
+    $(function () {
+      $('[data-text-slider]').textslider();
+    });
+  </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
     },
     swapForAnchor,
     swapForInput,
-    randomClass,
+    nextClass,
     setupTextSlider,
     bindClicks,
     onAnchorClick,
@@ -23,7 +23,7 @@
     inputFor,
     anchorFor;
 
-  randomClass = (function () {
+  nextClass = (function () {
     var i = 0;
     return function () {
       return 'LV-' + (i++);
@@ -91,7 +91,7 @@
 
   setupTextSlider = function ($e) {
     var
-      id = randomClass(),
+      id = nextClass(),
       $anchor = $('<a class="LVTextSliderAnchor" href="#"></a>');
 
     $e.blur(onInputBlur);

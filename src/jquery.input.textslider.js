@@ -6,7 +6,7 @@
     },
     swapForAnchor,
     swapForInput,
-    nextClass,
+    nextId,
     setupTextSlider,
     bindClicks,
     onAnchorClick,
@@ -23,10 +23,10 @@
     inputFor,
     anchorFor;
 
-  nextClass = (function () {
-    var i = 0;
+  nextId = (function () {
+    var id = 0;
     return function () {
-      return 'LV-' + (i++);
+      return 'LV-' + (id++);
     };
   }());
 
@@ -91,7 +91,7 @@
 
   setupTextSlider = function ($e) {
     var
-      id = nextClass(),
+      id = nextId(),
       $anchor = $('<a class="LVTextSliderAnchor" href="#"></a>');
 
     $e.blur(onInputBlur);

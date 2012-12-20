@@ -57,7 +57,7 @@
       currentValue = parseFloat($e.attr('data-starting-value'), 10),
       newValue = currentValue + ((x - startingX) * ratio());
 
-    newValue = Number(newValue.toFixed(options.precision));
+    newValue = Number(newValue.toFixed(precision($input)));
     $input.val(newValue);
     $e.trigger('jquery.textslider.changed');
   };
@@ -70,13 +70,11 @@
     return options.ratio * controlRatio * shiftRatio;
   };
 
-  precision = function ($a) {
-    var
-      $input = inputFor($a),
-      precision;
+  precision = function ($input) {
+    var precision;
 
     if ($input.length > 0) {
-      preicion = parseInt($input.attr('data-precision'), 10);
+      precision = parseInt($input.attr('data-precision'), 10);
     }
 
     if (isNaN(precision) || !precision) {
@@ -141,7 +139,7 @@
       $a = anchorFor($target),
       newValue = parseFloat($target.val(), 10);
 
-    newValue = newValue.toFixed(options.precision);
+    newValue = newValue.toFixed(precision($target));
 
     $target.val(newValue);
     swapForAnchor($target);

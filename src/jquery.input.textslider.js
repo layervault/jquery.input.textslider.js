@@ -21,7 +21,8 @@
     onKeyUp,
     ratio,
     inputFor,
-    anchorFor;
+    anchorFor,
+    conformToPrecision;
 
   nextId = (function () {
     var id = 0;
@@ -103,6 +104,8 @@
       .css('left', $e.offset().left)
       .css('cursor', 'pointer')
       .css('-webkit-user-drag', 'none')
+      .css('padding', '3px')
+      .css('font', '-webkit-small-control')
       .width($e.width())
       .height($e.height())
       .attr('data-id', id)
@@ -115,17 +118,23 @@
       var $a = $(this);
       $a.text(inputFor($a).val());
     });
-    // $anchor.mousedown(onAnchorMouseup);
+
+    conformToPrecision($e);
 
     $('body').append($anchor);
 
     $e.attr('data-anchor-class', id);
     swapForAnchor($e);
+    $anchor.trigger('jquery.textslider.changed');
   };
 
   valueFor = function ($e) {
     return parseFloat($e.val(), 10)
       .toFixed(precision($e));
+  };
+
+  conformToPrecision = function ($input) {
+    $input.val(valueFor($input));
   };
 
   //-- Methods to attach to jQuery sets
@@ -148,7 +157,7 @@
       $target = $(event.target),
       $a = anchorFor($target);
 
-    $target.val(valueFor($target));
+    conformToPrecision($target);
     swapForAnchor($target);
     $a.trigger('jquery.textslider.changed');
   };
@@ -160,7 +169,7 @@
 
     if (event.keyCode === 13) {
       $target = $(event.target);
-      $target.val(valueFor($target));
+      conformToPrecision($target);
       $a = anchorFor($target);
       swapForAnchor($target);
       $a.trigger('jquery.textslider.changed');

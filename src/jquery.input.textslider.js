@@ -106,6 +106,7 @@
       .css('-webkit-user-drag', 'none')
       .css('padding', '3px')
       .css('font', '-webkit-small-control')
+      .css('z-index', 9999)
       .width($e.width())
       .height($e.height())
       .attr('data-id', id)

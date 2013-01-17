@@ -95,7 +95,8 @@
 
     $e
       .blur(onInputBlur)
-      .keydown(onInputKeydown);
+      .keydown(onInputKeydown)
+      .css('position', 'absolute');
 
     $anchor
       .text($e.val())
@@ -110,7 +111,6 @@
       .width($e.width())
       .height($e.height())
       .attr('data-id', id)
-      .addClass()
       .hide();
 
     $anchor.click(onAnchorClick);
